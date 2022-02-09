@@ -28,7 +28,7 @@
                             <div class="form-group">
                                 <textarea name="comment" cols="40" rows="10" class="form-control"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Post comment</button>
+                            <input value="Post a comment" type="submit" class="btn btn-primary"/>
                         </form>
                     </div>
                     <br>
