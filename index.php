@@ -14,7 +14,7 @@
                             while($row = $st->fetch()){
                     ?>
                     <div class="blog-post">
-                        <h3 class="blog-post-title"><a href="single.php?article=<?php echo $row['article_id']; ?>"><?php echo $row['article_title']; ?></a></h3>
+                        <h3 class="blog-post-title"><?php echo $row['article_title']; ?></h3>
                         <p class="blog-post-meta"><?php echo $row['article_date']; ?> by <a href="#">Admin</a></p>
                         <a href="single.php?article=<?php echo $row['article_id']; ?>" class="btn btn-primary">Read the article</a>
                         <br>

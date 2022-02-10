@@ -1,12 +1,10 @@
 <?php
     include("includes/header.php");
-    /*echo "1";
-    if (isset($_GET['article']))) {
-        echo $_GET['article'];
-        $sql = "SELECT * FROM articles WHERE article_id = ?";
-        $st = $conn->prepare( $sql );
-        $st->execute([$_GET['article']]);
-    }*/
+    $sql = "SELECT * FROM articles WHERE article_id = :id";
+    $st = $conn->prepare( $sql );
+    $st->execute([
+        ':id' => $_GET['article']
+    ]);
 ?>
                     <br>
                     <?php

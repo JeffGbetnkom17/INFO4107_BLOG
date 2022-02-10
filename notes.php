@@ -1,12 +1,41 @@
 <?php
     include("includes/header.php");
+    $conn = new PDO("", "admin", "rootroot");
+    $status = "";
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $regnumber = $_POST['regnumber'];
+        $name = $_POST['name'];
+        $subject = $_POST['subject'];
+        $mark = $_POST['mark'];
+        if (empty($regnumber) || empty($name) || empty($subject) || empty($mark)) {
+            $status = "Missing informations.";
+        }
+        else {
+            $sql = "INSERT INTO notes (regnumber, name, subject, mark)
+                        VALUES (:regnumber, :name, :subject, :mark)";
+                $st = $conn->prepare($sql);
+                $st->execute([
+                    'regnumber' => $regnumber,
+                    'name' => $name,
+                    'subject' => $subject,
+                    'mark' => $mark
+                ]);
+
+
+                $status = "Your infos have been registered, you can now add comments.";
+                $regnumber = "";
+                $name = "";
+                $subject = "";
+                $mark = "";
+        }
+    }
 ?>
                     <div class="blog-header">
                         <h2>Students Result Management System</h2>
                     </div>
                     
                     <div class="blog-srms-form">
-                        <form class="form-horizontal">
+                        <form action="" method="POST" class="form-horizontal">
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Registration Number</label>
                                 <div class="col-sm-8">
@@ -33,7 +62,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                    <input value="Submit informations" type="submit" class="btn btn-primary"/>
                                 </div>
                             </div>
                         </form>
