@@ -1,6 +1,15 @@
 <?php
     include("includes/header.php");
-    $conn = new PDO("", "admin", "rootroot");
+    $dbhost = $_SERVER['notes-blog.crztxtabnevx.us-east-2.rds.amazonaws.com'];
+    $dbport = $_SERVER['3306'];
+    $dbname = $_SERVER['RDS_DB_NAME'];
+    $charset = 'utf8' ;
+
+    $dsn = "mysql:host={$dbhost};port={$dbport};dbname={$dbname};charset={$charset}";
+    $username = $_SERVER['admin'];
+    $password = $_SERVER['adminroot'];
+
+    $conn = new PDO($dsn, $username, $password);
     $status = "";
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $regnumber = $_POST['regnumber'];
