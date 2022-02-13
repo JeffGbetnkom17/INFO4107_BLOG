@@ -1,29 +1,56 @@
                     <?php
                         include("includes/header.php"); 
-                        session_start();
+                        $status = "";
                         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                            if ($_POST["username"] == ADMIN_USERNAME && $_POST["password"] == ADMIN_PASSWORD) {
-                                echo "It works";
-                                $_SESSION["username"] = $_POST["username"];
+                            $title = $_POST['title'];
+                            $category = $_POST['category'];
+                            $date = $_POST['date'];
+                            $content = $_POST['content'];
+                            if (empty($title) || empty($category) || empty($date) || empty($content)) {
+                                $status = "Missing informations.";
                             }
-                            echo "Session : " . $_SESSION["username"];
+                            else {
+                                $sql = "INSERT INTO articles (article_title, article_category, article_date, article_body)
+                                            VALUES (:title, :category, :date, :body)";
+                                $st = $conn->prepare($sql);
+                                $st->execute([
+                                    'title' => $title,
+                                    'category' => $category,
+                                    'date' => $date,
+                                    'body' => $content
+                                ]);
+
+                                $status = "The article has been registered in the database, refresh the home page.";
+                                $title = "";
+                                $category = "";
+                                $date = "";
+                                $content = "";
+                            }
                         }
-                        $username = isset( $_SESSION["username"] ) ? $_SESSION["username"] : "";
-                        echo "Username : " . $username;
-                        if ( $username == "" ) {
                     ?>
                     <form action="" method="POST" class="form-horizontal">
+                        <h6><?php echo "" . $status; ?></h6>
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">Username</label>
+                            <label class="col-sm-4 control-label">Title</label>
                             <div class="col-sm-8">
-                                <input type="text" name="username" class="form-control">
+                                <input type="text" name="title" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">Password</label>
+                            <label class="col-sm-4 control-label">Category</label>
                             <div class="col-sm-8">
-                                <input type="password" name="password" class="form-control">
+                                <input type="text" name="category" class="form-control">
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Date</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Content</label>
+                            <textarea name="content" cols="40" rows="10" class="form-control"></textarea>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
@@ -31,14 +58,6 @@
                             </div>
                         </div>
                     </form>
-                    <?php
-                        }
-                        else { 
-                    ?>
-                    <?php echo "Welcome " . $_SESSION["username"] ?>
-                    <?php
-                        }
-                    ?>
                 </div>
             </div>
         </div>

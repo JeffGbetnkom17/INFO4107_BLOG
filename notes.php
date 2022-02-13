@@ -50,7 +50,7 @@
                     
                     <div class="blog-srms-form">
                         <form action="" method="POST" class="form-horizontal">
-                            <p><?php $status ?></p>
+                            <p><?php echo "" . $status ?></p>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Registration Number</label>
                                 <div class="col-sm-8">

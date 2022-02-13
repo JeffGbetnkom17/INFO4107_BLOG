@@ -24,7 +24,7 @@
         <div class="blog-masthead" id="header">
             <div class="container">
                 <nav class="blog-nav">
-                    <a class="blog-nav-item active" href="admin/index.php">Admin Page</a>
+                    <a class="blog-nav-item active" href="index.php">Admin Page</a>
                 </nav>
             </div>
         </div>
