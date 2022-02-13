@@ -1,13 +1,18 @@
 <?php
     include("includes/header.php");
-    $dbhost = $_SERVER['notes-blog.crztxtabnevx.us-east-2.rds.amazonaws.com'];
-    $dbport = $_SERVER['3306'];
+    $_SERVER['RDS_HOSTNAME'] = "notes-blog.crztxtabnevx.us-east-2.rds.amazonaws.com";
+    $_SERVER['RDS_PORT'] = "3306";
+    $_SERVER['RDS_DB_NAME'] = "students_management";
+    $_SERVER['RDS_USERNAME'] = "admin";
+    $_SERVER['RDS_PASSWORD'] = "adminroot";
+    $dbhost = $_SERVER['RDS_HOSTNAME'];
+    $dbport = $_SERVER['RDS_PORT'];
     $dbname = $_SERVER['RDS_DB_NAME'];
     $charset = 'utf8' ;
 
     $dsn = "mysql:host={$dbhost};port={$dbport};dbname={$dbname};charset={$charset}";
-    $username = $_SERVER['admin'];
-    $password = $_SERVER['adminroot'];
+    $username = $_SERVER['RDS_USERNAME'];
+    $password = $_SERVER['RDS_PASSWORD'];
 
     $conn = new PDO($dsn, $username, $password);
     $status = "";
@@ -45,6 +50,7 @@
                     
                     <div class="blog-srms-form">
                         <form action="" method="POST" class="form-horizontal">
+                            <p><?php $status ?></p>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label">Registration Number</label>
                                 <div class="col-sm-8">
