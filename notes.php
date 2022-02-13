@@ -36,7 +36,7 @@
                 ]);
 
 
-                $status = "Your infos have been registered, you can now add comments.";
+                $status = "The student and his informations have been successfully registered.";
                 $regnumber = "";
                 $name = "";
                 $subject = "";
